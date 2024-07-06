@@ -1,17 +1,8 @@
-/* ************************************************************
- * PROGRAMMER  : // TODO:// Finish Documentation
- * PROJECT     : Savages-Online
- * VERSION     : 0.0.1
- * DESCRIPTION : // TODO:: Finish Documentation
- **************************************************************/
-
 #include "main.hpp"
 
 int main(int argc, char* argv[]) {
 
-    /**************************************************
-     * Get Current Working Directory
-     ***************************************************/
+    //Get Current Working Directory
     char path_save[1024];
     char cwd[1024];
     char* p;
@@ -27,21 +18,17 @@ int main(int argc, char* argv[]) {
     string NEW_WORKING_DIR = string(cwd) + "/";
     chdir(NEW_WORKING_DIR.c_str());
 
-    /**************************************************
-     * Window Initialization
-     ***************************************************/
+   
+    // Window Initialization
     InitWindow(1280, 720, "Savages-Online | Version 0.0.1");
 
-    CurlGlobalInit();    // Initialize curl globally
+    // Initialize curl globally
+    CurlGlobalInit();
 
-    /**************************************************
-     * Object/Class Initialization
-    ***************************************************/
+     // Object/Class Instantiation Section 
     Game *savages = new Game;
 
-    /**************************************************
-     * Variable Initialization
-     ***************************************************/
+    // Predetermined variable value's during the pre-game state.
     bool isGameRunning = true;
     
     CurrentGameState *gameState = new CurrentGameState;
