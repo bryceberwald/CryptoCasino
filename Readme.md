@@ -4,11 +4,15 @@
 
 ## --------------------------------------
 
-## Phone: 949-732-1311
+## Personal Website: https://www.berz.io/
 
-## Email: developer.berz.io
+## Tech Related Website: https://www.tech.berz.io/
 
-## --------------------------------------!SECTION
+## Non-profit website: https://www.humanity.berz.io/
+
+## Email me if you're interested in collaborating on the project @ <bryce.berwald@berz.io> and/or <developer@berz.io>
+
+## -------------------------------------
 
 ## Contributor's [Total of 3 developers's needed currently]
 
