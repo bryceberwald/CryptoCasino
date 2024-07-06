@@ -1,8 +1,70 @@
+# cmake_minimum_required(VERSION 3.14)
+
+# project(Savages-Online)
+
+# set(CMAKE_CXX_STANDARD 17)
+# set(CMAKE_BUILD_TYPE "Release")
+# set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# # RAYLIB LIBRARY
+# set(RAYLIB_VERSION 5.0)
+# find_package(raylib ${RAYLIB_VERSION} QUIET)
+# if (NOT raylib_FOUND) # If there's none, fetch and build raylib
+#   include(FetchContent)
+#   FetchContent_Declare(
+#     raylib
+#     DOWNLOAD_EXTRACT_TIMESTAMP OFF
+#     URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
+#   )
+#   FetchContent_GetProperties(raylib)
+#   if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
+#     set(FETCHCONTENT_QUIET NO)
+#     FetchContent_Populate(raylib)
+#     set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
+#     add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
+#   endif()
+# endif()
+
+# # CURL LIBRARY
+# set(CURL_VERSION 7.64.1)
+# find_package(CURL ${CURL_VERSION} REQUIRED)
+# if(NOT CURL_FOUND)
+#   include(FetchContent)
+#   FetchContent_Declare(
+# 	CURL
+# 	DOWNLOAD_EXTRACT_TIMESTAMP OFF
+# 	URL https://curl.se/download/curl-${CURL_VERSION}.tar.gz
+#   )
+#   FetchContent_GetProperties(curl)
+#   if (NOT CURL_POPULATED)
+#   	set(FETCHCONTENT_QUIET NO)
+#   	FetchContent_Populate(CURL)
+# 	set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE)
+# 	add_subdirectory(${CURL_SOURCE_DIR} ${CURL_BINARY_DIR})
+#   endif()
+# endif()
+
+# FetchContent_Declare(raylib URL https://github.com/raysan5/raylib/archive/refs/tags/4.5.0.tar.gz)
+# FetchContent_GetProperties(raylib)
+
+# FetchContent_Declare(curl URL https://curl.se/download/curl-7.64.1.tar.gz)
+# FetchContent_GetProperties(CURL)
+
+# FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
+# FetchContent_MakeAvailable(json)
+
+# file(GLOB_RECURSE CPP_SOURCES src/*.cpp)
+
+# add_executable(${PROJECT_NAME} ${CPP_SOURCES})
+
+# target_link_libraries(${PROJECT_NAME} raylib curl nlohmann_json::nlohmann_json)
+# target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../include/**)
+
 cmake_minimum_required(VERSION 3.14)
 
 project(Savages-Online)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -31,31 +93,40 @@ find_package(CURL ${CURL_VERSION} REQUIRED)
 if(NOT CURL_FOUND)
   include(FetchContent)
   FetchContent_Declare(
-	CURL
-	DOWNLOAD_EXTRACT_TIMESTAMP OFF
-	URL https://curl.se/download/curl-${CURL_VERSION}.tar.gz
+    CURL
+    DOWNLOAD_EXTRACT_TIMESTAMP OFF
+    URL https://curl.se/download/curl-${CURL_VERSION}.tar.gz
   )
   FetchContent_GetProperties(curl)
   if (NOT CURL_POPULATED)
-  	set(FETCHCONTENT_QUIET NO)
-  	FetchContent_Populate(CURL)
-	set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE)
-	add_subdirectory(${CURL_SOURCE_DIR} ${CURL_BINARY_DIR})
+    set(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(CURL)
+    set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE)
+    add_subdirectory(${CURL_SOURCE_DIR} ${CURL_BINARY_DIR})
   endif()
 endif()
 
-FetchContent_Declare(raylib URL https://github.com/raysan5/raylib/archive/refs/tags/4.5.0.tar.gz)
-FetchContent_GetProperties(raylib)
-
-FetchContent_Declare(curl URL https://curl.se/download/curl-7.64.1.tar.gz)
-FetchContent_GetProperties(CURL)
-
+# JSON LIBRARY
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
 FetchContent_MakeAvailable(json)
 
+# RAKNET LIBRARY
+include(FetchContent)
+FetchContent_Declare(
+  raknet
+  GIT_REPOSITORY https://github.com/facebookarchive/RakNet.git
+  GIT_TAG master
+)
+FetchContent_GetProperties(raknet)
+if (NOT raknet_POPULATED)
+  FetchContent_Populate(raknet)
+  add_subdirectory(${raknet_SOURCE_DIR} ${raknet_BINARY_DIR})
+endif()
+
 file(GLOB_RECURSE CPP_SOURCES src/*.cpp)
+message(STATUS "Source files: ${CPP_SOURCES}")
 
 add_executable(${PROJECT_NAME} ${CPP_SOURCES})
 
-target_link_libraries(${PROJECT_NAME} raylib curl nlohmann_json::nlohmann_json)
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../include/**)
+target_link_libraries(${PROJECT_NAME} raylib curl nlohmann_json::nlohmann_json RakNetLibStatic)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../include/** ${raknet_SOURCE_DIR}/Source)

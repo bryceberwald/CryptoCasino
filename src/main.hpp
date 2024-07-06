@@ -14,6 +14,7 @@ using namespace std;
 
 // External Libraries
 #include <raylib.h>
+#include "../include/BitStream.h"
 #include <nlohmann/json.hpp>
 
 #endif /* main_hpp */
