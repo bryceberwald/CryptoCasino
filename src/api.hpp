@@ -1,10 +1,3 @@
-/* ************************************************************
- * PROGRAMMER  : // TODO:// Finish Documentation
- * PROJECT     : Savages-Online
- * VERSION     : 0.0.1
- * DESCRIPTION : // TODO:: Finish Documentation
- **************************************************************/
-
 #ifndef api_hpp
 #define api_hpp
 
@@ -13,6 +6,13 @@
 #include <sstream>
 #include <string>
 #include <limits>
+// using std::cout;
+// using std::cin;
+// using std::endl;
+// using std::string;
+// using std::istream;
+// using std::ostream;
+using namespace std;
 
 // User Libraries
 // N/A
@@ -20,10 +20,7 @@
 // External Libraries
 #include <curl/curl.h>
 #include <curl/easy.h>
-#include <nlohmann/json.hpp>
-#include <nlohmann/detail/conversions/from_json.hpp>
-#include <nlohmann/detail/conversions/to_json.hpp>
-#include <nlohmann/detail/conversions/to_chars.hpp>
+#include "../include/nlohmann/json.hpp"
 using json = nlohmann::json;
 
 // Created struct for memory being allocated.
@@ -36,6 +33,7 @@ struct MemoryStruct {
 static size_t WriteMemoryCallback(char *contents, size_t size, size_t nmemb, void *userp);
 void CurlGlobalInit(void);
 void CurlGlobalCleanup(void);
+
 // json CurlCreateAccount(json registration);
 // json CurlLoginAccount(json login);
 

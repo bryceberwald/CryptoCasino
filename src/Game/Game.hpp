@@ -1,22 +1,13 @@
-/* ************************************************************
- * PROGRAMMER  : // TODO:// Finish Documentation
- * PROJECT     : Savages-Online
- * VERSION     : 0.0.1
- * DESCRIPTION : // TODO:: Finish Documentation
- **************************************************************/
-
 #ifndef Game_hpp
 #define Game_hpp
-
-#define MAX_CONTRIBUTORS 7
-
 
 //System Libraries
 #include <iostream>
 #include <string>
-#include <vector>
 using std::string;
-using std::vector;
+using std::cout;
+using std::cin;
+using std::endl;
 
 // User Libraries
 #include "Screen/Screen.hpp"
@@ -32,14 +23,7 @@ using std::vector;
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-/*********************************************/
-/*            Contributor Struct             */
-/*********************************************/
-struct Contributor {
-    string name;
-    string discordUsername;
-};
-
+// enum data structure to hold all the game screen value's as an integer value.
 enum CurrentGameState{
     LOADING_SCREEN,
     MAIN_MENU_SCREEN,
@@ -50,49 +34,39 @@ enum CurrentGameState{
     EXIT_SCREEN
 };
 
-/********************************************
- * Game Class
- *******************************************/
+// Game Class Definition
 class Game {
     
     public:
-        Game();                                 // Default Constructor 
-        ~Game();                                // Destructor
-        bool run(CurrentGameState *gameState);  // Runs the game from current state
+        // Default Constructor & default Destructor
+        Game();
+        ~Game();
 
-        void printVersion();      // Shows the version
-        void printHelp();         // Gives help
-        void printUsersOnline();  // Prints users online
-        void printLicense();      // Prints the license
-        void printContributors(); // Shows the contributor
+        // Class specific methods
+        bool run(CurrentGameState *gameState);
+        void printVersion();
 
         // Setters
         void setVersion(string version);
         void setHelp(string help);
-        void setUsersOnline(string usersOnline);
-        void setLicense(string license);
-        void setContributors(Contributor newContributor);
 
         // Getters
         string getVersion();
         string getHelp();
-        int  getUsersOnline();
-        string getLicense();
-        int getNumberOfContributors();
 
     private:
-        string license;
         string version;
         string help;
-        int usersOnline;
-        vector<Contributor> collaboratorArray[MAX_CONTRIBUTORS];
+
         LoadingScreen *loadingScreen;
         MainMenuScreen *mainMenuScreen;
         LoginScreen *loginScreen;
         RegisterScreen *registerScreen;
         CreditsScreen *creditsScreen;
         InGameScreen *inGameScreen;
+
         CurrentGameState *currentGameState;
+
         int loadingCounter;
 };
 
