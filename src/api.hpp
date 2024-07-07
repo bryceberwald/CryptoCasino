@@ -8,14 +8,9 @@
 #include <limits>
 using namespace std;
 
-// User Libraries
-// N/A
-
 // External Libraries
-#include <curl/curl.h>
-#include <curl/easy.h>
-#include "../include/nlohmann/json.hpp"
-using json = nlohmann::json;
+#include "../include/curl/curl.h"
+#include "../include/curl/easy.h"
 
 // Created struct for memory being allocated.
 struct MemoryStruct {
@@ -27,8 +22,5 @@ struct MemoryStruct {
 static size_t WriteMemoryCallback(char *contents, size_t size, size_t nmemb, void *userp);
 void CurlGlobalInit(void);
 void CurlGlobalCleanup(void);
-
-// json CurlCreateAccount(json registration);
-// json CurlLoginAccount(json login);
 
 #endif /* api_hpp */

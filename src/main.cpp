@@ -1,4 +1,15 @@
-#include "main.hpp"
+// System Libraries
+#include <unistd.h>
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+// User Libraries
+#include "api.hpp"
+
+// External Libraries
+#include "../include/raylib/raylib.h"
 
 int main(int argc, char* argv[]) {
 
@@ -20,28 +31,29 @@ int main(int argc, char* argv[]) {
 
    
     // Window Initialization
-    InitWindow(1280, 720, "Savages-Online | Version 0.0.1");
+    InitWindow(1280, 720, "Crypto Casino | v.0.0.1");
 
     // Initialize curl globally
     CurlGlobalInit();
-
-    // Predetermined variable value's during the pre-game state.
-    bool isGameRunning = true;
 
     // Set Target FPS
     SetTargetFPS(60);
 
     // Main game loop
-    while(!WindowShouldClose() && isGameRunning){
+    while(!WindowShouldClose()){
 
         BeginDrawing();
+        
+        ClearBackground((Color){0, 0, 0, 255 });
 
+        DrawText("Crypto Casino", 530, 250, 32, (Color){ 253, 249, 0, 255 });
         
         EndDrawing();
     };
 
     // De-Initialization=
     CurlGlobalCleanup();
+
     CloseWindow();
 
     // Return '0' to terminate the program.
