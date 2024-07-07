@@ -25,14 +25,8 @@ int main(int argc, char* argv[]) {
     // Initialize curl globally
     CurlGlobalInit();
 
-     // Object/Class Instantiation Section 
-    Game *savages = new Game;
-
     // Predetermined variable value's during the pre-game state.
     bool isGameRunning = true;
-    
-    CurrentGameState *gameState = new CurrentGameState;
-    *gameState = LOADING_SCREEN;
 
     // Set Target FPS
     SetTargetFPS(60);
@@ -42,9 +36,6 @@ int main(int argc, char* argv[]) {
 
         BeginDrawing();
 
-        ClearBackground(GRAY);
-        
-        isGameRunning = savages->run(gameState);
         
         EndDrawing();
     };

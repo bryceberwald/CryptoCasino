@@ -6,12 +6,6 @@
 #include <sstream>
 #include <string>
 #include <limits>
-// using std::cout;
-// using std::cin;
-// using std::endl;
-// using std::string;
-// using std::istream;
-// using std::ostream;
 using namespace std;
 
 // User Libraries
